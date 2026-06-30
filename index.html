@@ -374,6 +374,39 @@
 
 <script>
 (function() {
+  function findSectionByTitle(title) {
+    var headings = document.querySelectorAll('.section-title');
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].textContent.trim() === title) {
+        return headings[i].closest('.section');
+      }
+    }
+    return null;
+  }
+
+  var container = document.querySelector('.container');
+  var header = container ? container.querySelector('.header') : null;
+  var footer = container ? container.querySelector('.footer') : null;
+  var avSection = document.getElementById('av-portal');
+  var mermaidSection = document.getElementById('mermaid');
+  var researchSection = findSectionByTitle('User Research Approach');
+  var dividers = container ? container.querySelectorAll('.divider') : [];
+
+  if (container && header && footer && avSection && mermaidSection && researchSection && dividers.length >= 2) {
+    var firstDivider = dividers[0];
+    var secondDivider = dividers[1];
+
+    avSection.querySelector('.section-number').textContent = '01';
+    mermaidSection.querySelector('.section-number').textContent = '02';
+    researchSection.querySelector('.section-number').textContent = '03';
+
+    container.insertBefore(avSection, footer);
+    container.insertBefore(firstDivider, footer);
+    container.insertBefore(mermaidSection, footer);
+    container.insertBefore(secondDivider, footer);
+    container.insertBefore(researchSection, footer);
+  }
+
   var overlay = document.getElementById('lb-overlay');
   var img = document.getElementById('lb-img');
   var caption = document.getElementById('lb-caption');
