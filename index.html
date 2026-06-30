@@ -384,6 +384,13 @@
     return null;
   }
 
+  function insertAfter(referenceNode, newNode) {
+    if (!referenceNode || !referenceNode.parentNode) {
+      return;
+    }
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+
   var container = document.querySelector('.container');
   var header = container ? container.querySelector('.header') : null;
   var footer = container ? container.querySelector('.footer') : null;
@@ -400,11 +407,11 @@
     mermaidSection.querySelector('.section-number').textContent = '02';
     researchSection.querySelector('.section-number').textContent = '03';
 
-    container.insertBefore(avSection, footer);
-    container.insertBefore(firstDivider, footer);
-    container.insertBefore(mermaidSection, footer);
-    container.insertBefore(secondDivider, footer);
-    container.insertBefore(researchSection, footer);
+    insertAfter(header, avSection);
+    insertAfter(avSection, firstDivider);
+    insertAfter(firstDivider, mermaidSection);
+    insertAfter(mermaidSection, secondDivider);
+    insertAfter(secondDivider, researchSection);
   }
 
   var overlay = document.getElementById('lb-overlay');
